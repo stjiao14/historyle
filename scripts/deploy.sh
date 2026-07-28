@@ -9,7 +9,8 @@ WT=/tmp/historyle-pages
 git worktree remove --force "$WT" 2>/dev/null || true
 git worktree add "$WT" gh-pages --quiet
 
-rsync -a --delete --exclude '.git' --exclude '.gitignore' dist/ "$WT"/
+# 用校验和判断变化：哈希文件名长度相同 + 同一秒构建会让 mtime/大小判断失效
+rsync -ac --delete --exclude '.git' --exclude '.gitignore' dist/ "$WT"/
 touch "$WT/.nojekyll"
 
 cd "$WT"
