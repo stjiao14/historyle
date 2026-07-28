@@ -1,0 +1,4 @@
+node_modules/
+dist/
+scripts/candidates.json.bak
+.DS_Store
