@@ -180,8 +180,10 @@ body {
   overflow-x: auto;
   margin-bottom: 20px;
   display: grid;
-  grid-template-columns: repeat(10, minmax(0, max-content));
-  justify-content: center;
+  /* 列宽固定为内容宽度，窄屏出现横向滚动而不是压缩重叠 */
+  grid-template-columns: repeat(10, max-content);
+  /* safe：溢出时回退为左对齐，避免左侧被裁剪 */
+  justify-content: safe center;
   gap: 6px 5px;
 }
 
@@ -230,6 +232,21 @@ body {
 .dir {
   font-size: 0.78rem;
   opacity: 0.85;
+}
+
+/* 窄屏：缩小格子字号和内边距，减少横向滚动距离 */
+@media (max-width: 640px) {
+  .tile {
+    font-size: 0.8rem;
+    padding: 8px 5px;
+    min-height: 46px;
+  }
+  .dir {
+    font-size: 0.68rem;
+  }
+  .guess-header .header-cell {
+    font-size: 0.75rem;
+  }
 }
 
 .guess-header .header-cell {
